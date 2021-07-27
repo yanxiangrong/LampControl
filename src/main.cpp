@@ -6,7 +6,7 @@
 
 const char *ssid = "RM2100_72B5"; // key in your own SSID "IOT_2518"
 const char *password = "1234567890"; // key in your own WiFi access point password "wlwsys6688"
-const char *mqttHost = "yandage.top";  //
+const char *mqttHost = "yandage.top";  // Broker 地址
 const char *mqttUsername = "";
 const char *mqttPassword = "";
 const char *mqttTopic = "/lamp";
@@ -118,6 +118,9 @@ void loop() {
         Serial.println("Reconnecting");
 //        connectWiFi();
         connectBroker();
+        if (!mqttClient.connected()) {
+            EspClass::reset();
+        }
         digitalWrite(LED_BUILTIN, HIGH);
     }
 
