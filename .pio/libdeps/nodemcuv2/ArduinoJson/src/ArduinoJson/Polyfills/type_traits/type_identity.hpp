@@ -8,8 +8,8 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-template <typename T>
-struct type_identity {
-  typedef T type;
-};
+    template<typename T>
+    struct type_identity {
+        typedef T type;
+    };
 }  // namespace ARDUINOJSON_NAMESPACE

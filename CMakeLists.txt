@@ -14,20 +14,20 @@ project("untitled4" CXX)
 
 include(CMakeListsPrivate.txt)
 
-if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/CMakeListsUser.txt)
-include(CMakeListsUser.txt)
-endif()
+if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/CMakeListsUser.txt)
+    include(CMakeListsUser.txt)
+endif ()
 
 add_custom_target(
-    Production ALL
-    COMMAND platformio -c clion run "$<$<NOT:$<CONFIG:All>>:-e${CMAKE_BUILD_TYPE}>"
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        Production ALL
+        COMMAND platformio -c clion run "$<$<NOT:$<CONFIG:All>>:-e${CMAKE_BUILD_TYPE}>"
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 add_custom_target(
-    Debug ALL
-    COMMAND platformio -c clion run --target debug "$<$<NOT:$<CONFIG:All>>:-e${CMAKE_BUILD_TYPE}>"
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        Debug ALL
+        COMMAND platformio -c clion run --target debug "$<$<NOT:$<CONFIG:All>>:-e${CMAKE_BUILD_TYPE}>"
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 include_directories(.pio/libdeps/nodemcuv2/MQTT/src)

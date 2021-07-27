@@ -8,13 +8,13 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-template <bool Condition, class TrueType, class FalseType>
-struct conditional {
-  typedef TrueType type;
-};
+    template<bool Condition, class TrueType, class FalseType>
+    struct conditional {
+        typedef TrueType type;
+    };
 
-template <class TrueType, class FalseType>
-struct conditional<false, TrueType, FalseType> {
-  typedef FalseType type;
-};
+    template<class TrueType, class FalseType>
+    struct conditional<false, TrueType, FalseType> {
+        typedef FalseType type;
+    };
 }  // namespace ARDUINOJSON_NAMESPACE

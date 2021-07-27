@@ -9,47 +9,47 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 // A key value pair for CollectionData.
-class Pair {
- public:
-  Pair(MemoryPool* pool, VariantSlot* slot) {
-    if (slot) {
-      _key = String(slot->key(), !slot->ownsKey());
-      _value = VariantRef(pool, slot->data());
-    }
-  }
+    class Pair {
+    public:
+        Pair(MemoryPool *pool, VariantSlot *slot) {
+            if (slot) {
+                _key = String(slot->key(), !slot->ownsKey());
+                _value = VariantRef(pool, slot->data());
+            }
+        }
 
-  String key() const {
-    return _key;
-  }
+        String key() const {
+            return _key;
+        }
 
-  VariantRef value() const {
-    return _value;
-  }
+        VariantRef value() const {
+            return _value;
+        }
 
- private:
-  String _key;
-  VariantRef _value;
-};
+    private:
+        String _key;
+        VariantRef _value;
+    };
 
-class PairConst {
- public:
-  PairConst(const VariantSlot* slot) {
-    if (slot) {
-      _key = String(slot->key(), !slot->ownsKey());
-      _value = VariantConstRef(slot->data());
-    }
-  }
+    class PairConst {
+    public:
+        PairConst(const VariantSlot *slot) {
+            if (slot) {
+                _key = String(slot->key(), !slot->ownsKey());
+                _value = VariantConstRef(slot->data());
+            }
+        }
 
-  String key() const {
-    return _key;
-  }
+        String key() const {
+            return _key;
+        }
 
-  VariantConstRef value() const {
-    return _value;
-  }
+        VariantConstRef value() const {
+            return _value;
+        }
 
- private:
-  String _key;
-  VariantConstRef _value;
-};
+    private:
+        String _key;
+        VariantConstRef _value;
+    };
 }  // namespace ARDUINOJSON_NAMESPACE

@@ -13,28 +13,28 @@
  * connection.
  */
 typedef enum {
-  LWMQTT_SUCCESS = 0,
-  LWMQTT_BUFFER_TOO_SHORT = -1,
-  LWMQTT_VARNUM_OVERFLOW = -2,
-  LWMQTT_NETWORK_FAILED_CONNECT = -3,
-  LWMQTT_NETWORK_TIMEOUT = -4,
-  LWMQTT_NETWORK_FAILED_READ = -5,
-  LWMQTT_NETWORK_FAILED_WRITE = -6,
-  LWMQTT_REMAINING_LENGTH_OVERFLOW = -7,
-  LWMQTT_REMAINING_LENGTH_MISMATCH = -8,
-  LWMQTT_MISSING_OR_WRONG_PACKET = -9,
-  LWMQTT_CONNECTION_DENIED = -10,
-  LWMQTT_FAILED_SUBSCRIPTION = -11,
-  LWMQTT_SUBACK_ARRAY_OVERFLOW = -12,
-  LWMQTT_PONG_TIMEOUT = -13,
+    LWMQTT_SUCCESS = 0,
+    LWMQTT_BUFFER_TOO_SHORT = -1,
+    LWMQTT_VARNUM_OVERFLOW = -2,
+    LWMQTT_NETWORK_FAILED_CONNECT = -3,
+    LWMQTT_NETWORK_TIMEOUT = -4,
+    LWMQTT_NETWORK_FAILED_READ = -5,
+    LWMQTT_NETWORK_FAILED_WRITE = -6,
+    LWMQTT_REMAINING_LENGTH_OVERFLOW = -7,
+    LWMQTT_REMAINING_LENGTH_MISMATCH = -8,
+    LWMQTT_MISSING_OR_WRONG_PACKET = -9,
+    LWMQTT_CONNECTION_DENIED = -10,
+    LWMQTT_FAILED_SUBSCRIPTION = -11,
+    LWMQTT_SUBACK_ARRAY_OVERFLOW = -12,
+    LWMQTT_PONG_TIMEOUT = -13,
 } lwmqtt_err_t;
 
 /**
  * A common string object.
  */
 typedef struct {
-  uint16_t len;
-  char *data;
+    uint16_t len;
+    char *data;
 } lwmqtt_string_t;
 
 /**
@@ -63,16 +63,18 @@ int lwmqtt_strcmp(lwmqtt_string_t a, const char *b);
 /**
  * The available QOS levels.
  */
-typedef enum { LWMQTT_QOS0 = 0, LWMQTT_QOS1 = 1, LWMQTT_QOS2 = 2, LWMQTT_QOS_FAILURE = 128 } lwmqtt_qos_t;
+typedef enum {
+    LWMQTT_QOS0 = 0, LWMQTT_QOS1 = 1, LWMQTT_QOS2 = 2, LWMQTT_QOS_FAILURE = 128
+} lwmqtt_qos_t;
 
 /**
  * The message object used to publish and receive messages.
  */
 typedef struct {
-  lwmqtt_qos_t qos;
-  bool retained;
-  uint8_t *payload;
-  size_t payload_len;
+    lwmqtt_qos_t qos;
+    bool retained;
+    uint8_t *payload;
+    size_t payload_len;
 } lwmqtt_message_t;
 
 /**
@@ -145,27 +147,27 @@ typedef void (*lwmqtt_callback_t)(lwmqtt_client_t *client, void *ref, lwmqtt_str
  * The mqttClient object.
  */
 struct lwmqtt_client_t {
-  uint16_t last_packet_id;
-  uint32_t keep_alive_interval;
-  bool pong_pending;
+    uint16_t last_packet_id;
+    uint32_t keep_alive_interval;
+    bool pong_pending;
 
-  size_t write_buf_size, read_buf_size;
-  uint8_t *write_buf, *read_buf;
+    size_t write_buf_size, read_buf_size;
+    uint8_t *write_buf, *read_buf;
 
-  lwmqtt_callback_t callback;
-  void *callback_ref;
+    lwmqtt_callback_t callback;
+    void *callback_ref;
 
-  void *network;
-  lwmqtt_network_read_t network_read;
-  lwmqtt_network_write_t network_write;
+    void *network;
+    lwmqtt_network_read_t network_read;
+    lwmqtt_network_write_t network_write;
 
-  void *keep_alive_timer;
-  void *command_timer;
-  lwmqtt_timer_set_t timer_set;
-  lwmqtt_timer_get_t timer_get;
+    void *keep_alive_timer;
+    void *command_timer;
+    lwmqtt_timer_set_t timer_set;
+    lwmqtt_timer_get_t timer_get;
 
-  bool drop_overflow;
-  uint32_t *overflow_counter;
+    bool drop_overflow;
+    uint32_t *overflow_counter;
 };
 
 /**
@@ -225,10 +227,10 @@ void lwmqtt_drop_overflow(lwmqtt_client_t *client, bool enabled, uint32_t *count
  * The object defining the last will of a mqttClient.
  */
 typedef struct {
-  lwmqtt_string_t topic;
-  lwmqtt_qos_t qos;
-  bool retained;
-  lwmqtt_string_t payload;
+    lwmqtt_string_t topic;
+    lwmqtt_qos_t qos;
+    bool retained;
+    lwmqtt_string_t payload;
 } lwmqtt_will_t;
 
 /**
@@ -241,11 +243,11 @@ typedef struct {
  * The object containing the connection options for a mqttClient.
  */
 typedef struct {
-  lwmqtt_string_t client_id;
-  uint16_t keep_alive;
-  bool clean_session;
-  lwmqtt_string_t username;
-  lwmqtt_string_t password;
+    lwmqtt_string_t client_id;
+    uint16_t keep_alive;
+    bool clean_session;
+    lwmqtt_string_t username;
+    lwmqtt_string_t password;
 } lwmqtt_options_t;
 
 /**
@@ -258,13 +260,13 @@ typedef struct {
  * The available return codes transported by the connack packet.
  */
 typedef enum {
-  LWMQTT_CONNECTION_ACCEPTED = 0,
-  LWMQTT_UNACCEPTABLE_PROTOCOL = 1,
-  LWMQTT_IDENTIFIER_REJECTED = 2,
-  LWMQTT_SERVER_UNAVAILABLE = 3,
-  LWMQTT_BAD_USERNAME_OR_PASSWORD = 4,
-  LWMQTT_NOT_AUTHORIZED = 5,
-  LWMQTT_UNKNOWN_RETURN_CODE = 6
+    LWMQTT_CONNECTION_ACCEPTED = 0,
+    LWMQTT_UNACCEPTABLE_PROTOCOL = 1,
+    LWMQTT_IDENTIFIER_REJECTED = 2,
+    LWMQTT_SERVER_UNAVAILABLE = 3,
+    LWMQTT_BAD_USERNAME_OR_PASSWORD = 4,
+    LWMQTT_NOT_AUTHORIZED = 5,
+    LWMQTT_UNKNOWN_RETURN_CODE = 6
 } lwmqtt_return_code_t;
 
 /**

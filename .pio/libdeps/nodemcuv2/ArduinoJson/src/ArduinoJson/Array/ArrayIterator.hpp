@@ -9,113 +9,117 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-class VariantPtr {
- public:
-  VariantPtr(MemoryPool *pool, VariantData *data) : _variant(pool, data) {}
+    class VariantPtr {
+    public:
+        VariantPtr(MemoryPool *pool, VariantData *data) : _variant(pool, data) {}
 
-  VariantRef *operator->() {
-    return &_variant;
-  }
+        VariantRef *operator->() {
+            return &_variant;
+        }
 
-  VariantRef &operator*() {
-    return _variant;
-  }
+        VariantRef &operator*() {
+            return _variant;
+        }
 
- private:
-  VariantRef _variant;
-};
+    private:
+        VariantRef _variant;
+    };
 
-class ArrayIterator {
- public:
-  ArrayIterator() : _slot(0) {}
-  explicit ArrayIterator(MemoryPool *pool, VariantSlot *slot)
-      : _pool(pool), _slot(slot) {}
+    class ArrayIterator {
+    public:
+        ArrayIterator() : _slot(0) {}
 
-  VariantRef operator*() const {
-    return VariantRef(_pool, _slot->data());
-  }
-  VariantPtr operator->() {
-    return VariantPtr(_pool, _slot->data());
-  }
+        explicit ArrayIterator(MemoryPool *pool, VariantSlot *slot)
+                : _pool(pool), _slot(slot) {}
 
-  bool operator==(const ArrayIterator &other) const {
-    return _slot == other._slot;
-  }
+        VariantRef operator*() const {
+            return VariantRef(_pool, _slot->data());
+        }
 
-  bool operator!=(const ArrayIterator &other) const {
-    return _slot != other._slot;
-  }
+        VariantPtr operator->() {
+            return VariantPtr(_pool, _slot->data());
+        }
 
-  ArrayIterator &operator++() {
-    _slot = _slot->next();
-    return *this;
-  }
+        bool operator==(const ArrayIterator &other) const {
+            return _slot == other._slot;
+        }
 
-  ArrayIterator &operator+=(size_t distance) {
-    _slot = _slot->next(distance);
-    return *this;
-  }
+        bool operator!=(const ArrayIterator &other) const {
+            return _slot != other._slot;
+        }
 
-  VariantSlot *internal() {
-    return _slot;
-  }
+        ArrayIterator &operator++() {
+            _slot = _slot->next();
+            return *this;
+        }
 
- private:
-  MemoryPool *_pool;
-  VariantSlot *_slot;
-};
+        ArrayIterator &operator+=(size_t distance) {
+            _slot = _slot->next(distance);
+            return *this;
+        }
 
-class VariantConstPtr {
- public:
-  VariantConstPtr(const VariantData *data) : _variant(data) {}
+        VariantSlot *internal() {
+            return _slot;
+        }
 
-  VariantConstRef *operator->() {
-    return &_variant;
-  }
+    private:
+        MemoryPool *_pool;
+        VariantSlot *_slot;
+    };
 
-  VariantConstRef &operator*() {
-    return _variant;
-  }
+    class VariantConstPtr {
+    public:
+        VariantConstPtr(const VariantData *data) : _variant(data) {}
 
- private:
-  VariantConstRef _variant;
-};
+        VariantConstRef *operator->() {
+            return &_variant;
+        }
 
-class ArrayConstRefIterator {
- public:
-  ArrayConstRefIterator() : _slot(0) {}
-  explicit ArrayConstRefIterator(const VariantSlot *slot) : _slot(slot) {}
+        VariantConstRef &operator*() {
+            return _variant;
+        }
 
-  VariantConstRef operator*() const {
-    return VariantConstRef(_slot->data());
-  }
-  VariantConstPtr operator->() {
-    return VariantConstPtr(_slot->data());
-  }
+    private:
+        VariantConstRef _variant;
+    };
 
-  bool operator==(const ArrayConstRefIterator &other) const {
-    return _slot == other._slot;
-  }
+    class ArrayConstRefIterator {
+    public:
+        ArrayConstRefIterator() : _slot(0) {}
 
-  bool operator!=(const ArrayConstRefIterator &other) const {
-    return _slot != other._slot;
-  }
+        explicit ArrayConstRefIterator(const VariantSlot *slot) : _slot(slot) {}
 
-  ArrayConstRefIterator &operator++() {
-    _slot = _slot->next();
-    return *this;
-  }
+        VariantConstRef operator*() const {
+            return VariantConstRef(_slot->data());
+        }
 
-  ArrayConstRefIterator &operator+=(size_t distance) {
-    _slot = _slot->next(distance);
-    return *this;
-  }
+        VariantConstPtr operator->() {
+            return VariantConstPtr(_slot->data());
+        }
 
-  const VariantSlot *internal() {
-    return _slot;
-  }
+        bool operator==(const ArrayConstRefIterator &other) const {
+            return _slot == other._slot;
+        }
 
- private:
-  const VariantSlot *_slot;
-};
+        bool operator!=(const ArrayConstRefIterator &other) const {
+            return _slot != other._slot;
+        }
+
+        ArrayConstRefIterator &operator++() {
+            _slot = _slot->next();
+            return *this;
+        }
+
+        ArrayConstRefIterator &operator+=(size_t distance) {
+            _slot = _slot->next(distance);
+            return *this;
+        }
+
+        const VariantSlot *internal() {
+            return _slot;
+        }
+
+    private:
+        const VariantSlot *_slot;
+    };
 }  // namespace ARDUINOJSON_NAMESPACE

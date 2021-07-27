@@ -10,20 +10,20 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-struct DefaultAllocator {
-  void* allocate(size_t size) {
-    return malloc(size);
-  }
+    struct DefaultAllocator {
+        void *allocate(size_t size) {
+            return malloc(size);
+        }
 
-  void deallocate(void* ptr) {
-    free(ptr);
-  }
+        void deallocate(void *ptr) {
+            free(ptr);
+        }
 
-  void* reallocate(void* ptr, size_t new_size) {
-    return realloc(ptr, new_size);
-  }
-};
+        void *reallocate(void *ptr, size_t new_size) {
+            return realloc(ptr, new_size);
+        }
+    };
 
-typedef BasicJsonDocument<DefaultAllocator> DynamicJsonDocument;
+    typedef BasicJsonDocument<DefaultAllocator> DynamicJsonDocument;
 
 }  // namespace ARDUINOJSON_NAMESPACE

@@ -4,13 +4,13 @@
 #include <ArduinoJson.h>
 #include <WiFiManager.h>
 
-const char* ssid = "RM2100_72B5"; // key in your own SSID "IOT_2518"
-const char* password = "1234567890"; // key in your own WiFi access point password "wlwsys6688"
-const char* mqttHost = "yandage.top";  //
-const char* mqttUsername = "";
-const char* mqttPassword = "";
-const char* mqttTopic = "/lamp";
-const char* clientID = "NodeMcu_1";
+const char *ssid = "RM2100_72B5"; // key in your own SSID "IOT_2518"
+const char *password = "1234567890"; // key in your own WiFi access point password "wlwsys6688"
+const char *mqttHost = "yandage.top";  //
+const char *mqttUsername = "";
+const char *mqttPassword = "";
+const char *mqttTopic = "/lamp";
+const char *clientID = "NodeMcu_1";
 const int lampPin = D1;
 
 WiFiClient wiFiClient;
@@ -98,11 +98,10 @@ void setup() {
     WiFiManager wifiManager;
     bool res;
     res = wifiManager.autoConnect(clientID); // password protected ap
-    if(!res) {
+    if (!res) {
         Serial.println("Failed to connect");
-         EspClass::reset();
-    }
-    else {
+        EspClass::reset();
+    } else {
         //if you get here you have connected to the WiFi
         Serial.println("connected...yeey :)");
     }

@@ -10,21 +10,21 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-template <int Bits>
-struct int_t;
+    template<int Bits>
+    struct int_t;
 
-template <>
-struct int_t<8> {
-  typedef int8_t type;
-};
+    template<>
+    struct int_t<8> {
+        typedef int8_t type;
+    };
 
-template <>
-struct int_t<16> {
-  typedef int16_t type;
-};
+    template<>
+    struct int_t<16> {
+        typedef int16_t type;
+    };
 
-template <>
-struct int_t<32> {
-  typedef int32_t type;
-};
+    template<>
+    struct int_t<32> {
+        typedef int32_t type;
+    };
 }  // namespace ARDUINOJSON_NAMESPACE

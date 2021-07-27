@@ -10,11 +10,12 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-template <class T>
-struct is_floating_point
-    : integral_constant<
-          bool,  //
-          is_same<float, typename remove_cv<T>::type>::value ||
-              is_same<double, typename remove_cv<T>::type>::value> {};
+    template<class T>
+    struct is_floating_point
+            : integral_constant<
+                    bool,  //
+                    is_same<float, typename remove_cv<T>::type>::value ||
+                    is_same<double, typename remove_cv<T>::type>::value> {
+    };
 
 }  // namespace ARDUINOJSON_NAMESPACE

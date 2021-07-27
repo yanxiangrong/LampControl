@@ -8,7 +8,7 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-template <typename T>
-T declval();
+    template<typename T>
+    T declval();
 
 }  // namespace ARDUINOJSON_NAMESPACE

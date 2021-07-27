@@ -33,23 +33,36 @@ ArduinoJson is a C++ JSON library for Arduino and IoT (Internet Of Things).
     * [Optionally works without heap memory (zero malloc)](https://arduinojson.org/v6/api/staticjsondocument/?utm_source=github&utm_medium=readme)
     * Deduplicates strings
 * Versatile
-    * Supports [custom allocators (to use external RAM chip, for example)](https://arduinojson.org/v6/how-to/use-external-ram-on-esp32/?utm_source=github&utm_medium=readme)
-    * Supports [`String`](https://arduinojson.org/v6/api/config/enable_arduino_string/?utm_source=github&utm_medium=readme), [`std::string`](https://arduinojson.org/v6/api/config/enable_std_string/?utm_source=github&utm_medium=readme) and [`std::string_view`](https://arduinojson.org/v6/api/config/enable_string_view/?utm_source=github&utm_medium=readme)
-    * Supports [`Stream`](https://arduinojson.org/v6/api/config/enable_arduino_stream/?utm_source=github&utm_medium=readme) and [`std::istream`/`std::ostream`](https://arduinojson.org/v6/api/config/enable_std_stream/?utm_source=github&utm_medium=readme)
-    * Supports [Flash strings](https://arduinojson.org/v6/api/config/enable_progmem/?utm_source=github&utm_medium=readme)
-    * Supports [custom readers](https://arduinojson.org/v6/api/json/deserializejson/?utm_source=github&utm_medium=readme#custom-reader) and [custom writers](https://arduinojson.org/v6/api/json/serializejson/?utm_source=github&utm_medium=readme#custom-writer)
-    * Supports [custom converters](https://arduinojson.org/news/2021/05/04/version-6-18-0/?utm_source=github&utm_medium=readme)
+    *
+    Supports [custom allocators (to use external RAM chip, for example)](https://arduinojson.org/v6/how-to/use-external-ram-on-esp32/?utm_source=github&utm_medium=readme)
+    *
+    Supports [`String`](https://arduinojson.org/v6/api/config/enable_arduino_string/?utm_source=github&utm_medium=readme)
+    , [`std::string`](https://arduinojson.org/v6/api/config/enable_std_string/?utm_source=github&utm_medium=readme)
+    and [`std::string_view`](https://arduinojson.org/v6/api/config/enable_string_view/?utm_source=github&utm_medium=readme)
+    *
+    Supports [`Stream`](https://arduinojson.org/v6/api/config/enable_arduino_stream/?utm_source=github&utm_medium=readme)
+    and [`std::istream`/`std::ostream`](https://arduinojson.org/v6/api/config/enable_std_stream/?utm_source=github&utm_medium=readme)
+    *
+    Supports [Flash strings](https://arduinojson.org/v6/api/config/enable_progmem/?utm_source=github&utm_medium=readme)
+    *
+    Supports [custom readers](https://arduinojson.org/v6/api/json/deserializejson/?utm_source=github&utm_medium=readme#custom-reader)
+    and [custom writers](https://arduinojson.org/v6/api/json/serializejson/?utm_source=github&utm_medium=readme#custom-writer)
+    *
+    Supports [custom converters](https://arduinojson.org/news/2021/05/04/version-6-18-0/?utm_source=github&utm_medium=readme)
 * Portable
     * Usable on any C++ project (not limited to Arduino)
     * Compatible with C++98, C++11, C++14 and C++17
     * Zero warnings with `-Wall -Wextra -pedantic` and `/W4`
     * [Header-only library](https://en.wikipedia.org/wiki/Header-only)
     * Works with virtually any board
-        * Arduino boards: [Uno](https://amzn.to/38aL2ik), [Due](https://amzn.to/36YkWi2), [Micro](https://amzn.to/35WkdwG), [Nano](https://amzn.to/2QTvwRX), [Mega](https://amzn.to/36XWhuf), [Yun](https://amzn.to/30odURc), [Leonardo](https://amzn.to/36XWjlR)...
+        * Arduino boards: [Uno](https://amzn.to/38aL2ik), [Due](https://amzn.to/36YkWi2)
+          , [Micro](https://amzn.to/35WkdwG), [Nano](https://amzn.to/2QTvwRX), [Mega](https://amzn.to/36XWhuf)
+          , [Yun](https://amzn.to/30odURc), [Leonardo](https://amzn.to/36XWjlR)...
         * Espressif chips: [ESP8266](https://amzn.to/36YluV8), [ESP32](https://amzn.to/2G4pRCB)
         * Lolin (WeMos) boards: [D1 mini](https://amzn.to/2QUpz7q), [D1 Mini Pro](https://amzn.to/36UsGSs)...
-        * Teensy boards: [4.0](https://amzn.to/30ljXGq), [3.2](https://amzn.to/2FT0EuC), [2.0](https://amzn.to/2QXUMXj) 
-        * Particle boards: [Argon](https://amzn.to/2FQHa9X), [Boron](https://amzn.to/36WgLUd), [Electron](https://amzn.to/30vEc4k), [Photon](https://amzn.to/387F9Cd)...
+        * Teensy boards: [4.0](https://amzn.to/30ljXGq), [3.2](https://amzn.to/2FT0EuC), [2.0](https://amzn.to/2QXUMXj)
+        * Particle boards: [Argon](https://amzn.to/2FQHa9X), [Boron](https://amzn.to/36WgLUd)
+          , [Electron](https://amzn.to/30vEc4k), [Photon](https://amzn.to/387F9Cd)...
         * Texas Instruments boards: [MSP430](https://amzn.to/30nJWgg)...
     * Tested on all major development environments
         * [Arduino IDE](https://www.arduino.cc/en/Main/Software)
@@ -73,7 +86,8 @@ ArduinoJson is a C++ JSON library for Arduino and IoT (Internet Of Things).
     * `const` friendly
     * [`for` friendly](https://arduinojson.org/v6/api/jsonobject/begin_end/?utm_source=github&utm_medium=readme)
     * [TMP friendly](https://en.wikipedia.org/wiki/Template_metaprogramming)
-    * Handles [integer overflows](https://arduinojson.org/v6/api/jsonvariant/as/?utm_source=github&utm_medium=readme#integer-overflows)
+    *
+    Handles [integer overflows](https://arduinojson.org/v6/api/jsonvariant/as/?utm_source=github&utm_medium=readme#integer-overflows)
 * Well tested
     * [Unit test coverage close to 100%](https://coveralls.io/github/bblanchon/ArduinoJson?branch=6.x)
     * Continuously tested on
@@ -81,7 +95,8 @@ ArduinoJson is a C++ JSON library for Arduino and IoT (Internet Of Things).
         * [GCC 4.4, 4.6, 4.7, 4.8, 4.9, 5, 6, 7, 8, 9, 10](https://github.com/bblanchon/ArduinoJson/actions?query=workflow%3A%22Continuous+Integration%22)
         * [Clang 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 5.0, 6.0, 7, 8, 9, 10](https://github.com/bblanchon/ArduinoJson/actions?query=workflow%3A%22Continuous+Integration%22)
     * [Continuously fuzzed with Google OSS Fuzz](https://bugs.chromium.org/p/oss-fuzz/issues/list?sort=-opened&can=1&q=proj:arduinojson)
-    * Passes all default checks of [clang-tidy](https://releases.llvm.org/10.0.0/tools/clang/tools/extra/docs/clang-tidy/)
+    * Passes all default checks
+      of [clang-tidy](https://releases.llvm.org/10.0.0/tools/clang/tools/extra/docs/clang-tidy/)
 * Well documented
     * [Tutorials](https://arduinojson.org/v6/doc/deserialization/?utm_source=github&utm_medium=readme)
     * [Examples](https://arduinojson.org/v6/example/?utm_source=github&utm_medium=readme)
@@ -91,7 +106,8 @@ ArduinoJson is a C++ JSON library for Arduino and IoT (Internet Of Things).
     * [Book](https://arduinojson.org/book/?utm_source=github&utm_medium=readme)
     * [Changelog](CHANGELOG.md)
 * Vibrant user community
-    * Most popular of all Arduino libraries on [GitHub](https://github.com/search?o=desc&q=arduino+library&s=stars&type=Repositories)
+    * Most popular of all Arduino libraries
+      on [GitHub](https://github.com/search?o=desc&q=arduino+library&s=stars&type=Repositories)
     * [Used in hundreds of projects](https://www.hackster.io/search?i=projects&q=arduinojson)
     * [Responsive support](https://github.com/bblanchon/ArduinoJson/issues?q=is%3Aissue+is%3Aclosed)
 

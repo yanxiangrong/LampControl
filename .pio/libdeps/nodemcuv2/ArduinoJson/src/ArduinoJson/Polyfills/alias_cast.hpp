@@ -12,18 +12,18 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-template <typename T, typename F>
-struct alias_cast_t {
-  union {
-    F raw;
-    T data;
-  };
-};
+    template<typename T, typename F>
+    struct alias_cast_t {
+        union {
+            F raw;
+            T data;
+        };
+    };
 
-template <typename T, typename F>
-T alias_cast(F raw_data) {
-  alias_cast_t<T, F> ac;
-  ac.raw = raw_data;
-  return ac.data;
-}
+    template<typename T, typename F>
+    T alias_cast(F raw_data) {
+        alias_cast_t<T, F> ac;
+        ac.raw = raw_data;
+        return ac.data;
+    }
 }  // namespace ARDUINOJSON_NAMESPACE

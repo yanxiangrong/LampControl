@@ -40,34 +40,34 @@
 #include "ArduinoJson/compatibility.hpp"
 
 namespace ArduinoJson {
-typedef ARDUINOJSON_NAMESPACE::ArrayConstRef JsonArrayConst;
-typedef ARDUINOJSON_NAMESPACE::ArrayRef JsonArray;
-typedef ARDUINOJSON_NAMESPACE::Float JsonFloat;
-typedef ARDUINOJSON_NAMESPACE::Integer JsonInteger;
-typedef ARDUINOJSON_NAMESPACE::ObjectConstRef JsonObjectConst;
-typedef ARDUINOJSON_NAMESPACE::ObjectRef JsonObject;
-typedef ARDUINOJSON_NAMESPACE::Pair JsonPair;
-typedef ARDUINOJSON_NAMESPACE::PairConst JsonPairConst;
-typedef ARDUINOJSON_NAMESPACE::String JsonString;
-typedef ARDUINOJSON_NAMESPACE::UInt JsonUInt;
-typedef ARDUINOJSON_NAMESPACE::VariantConstRef JsonVariantConst;
-typedef ARDUINOJSON_NAMESPACE::VariantRef JsonVariant;
-using ARDUINOJSON_NAMESPACE::BasicJsonDocument;
-using ARDUINOJSON_NAMESPACE::copyArray;
-using ARDUINOJSON_NAMESPACE::DeserializationError;
-using ARDUINOJSON_NAMESPACE::deserializeJson;
-using ARDUINOJSON_NAMESPACE::deserializeMsgPack;
-using ARDUINOJSON_NAMESPACE::DynamicJsonDocument;
-using ARDUINOJSON_NAMESPACE::JsonDocument;
-using ARDUINOJSON_NAMESPACE::measureJson;
-using ARDUINOJSON_NAMESPACE::serialized;
-using ARDUINOJSON_NAMESPACE::serializeJson;
-using ARDUINOJSON_NAMESPACE::serializeJsonPretty;
-using ARDUINOJSON_NAMESPACE::serializeMsgPack;
-using ARDUINOJSON_NAMESPACE::StaticJsonDocument;
+    typedef ARDUINOJSON_NAMESPACE::ArrayConstRef JsonArrayConst;
+    typedef ARDUINOJSON_NAMESPACE::ArrayRef JsonArray;
+    typedef ARDUINOJSON_NAMESPACE::Float JsonFloat;
+    typedef ARDUINOJSON_NAMESPACE::Integer JsonInteger;
+    typedef ARDUINOJSON_NAMESPACE::ObjectConstRef JsonObjectConst;
+    typedef ARDUINOJSON_NAMESPACE::ObjectRef JsonObject;
+    typedef ARDUINOJSON_NAMESPACE::Pair JsonPair;
+    typedef ARDUINOJSON_NAMESPACE::PairConst JsonPairConst;
+    typedef ARDUINOJSON_NAMESPACE::String JsonString;
+    typedef ARDUINOJSON_NAMESPACE::UInt JsonUInt;
+    typedef ARDUINOJSON_NAMESPACE::VariantConstRef JsonVariantConst;
+    typedef ARDUINOJSON_NAMESPACE::VariantRef JsonVariant;
+    using ARDUINOJSON_NAMESPACE::BasicJsonDocument;
+    using ARDUINOJSON_NAMESPACE::copyArray;
+    using ARDUINOJSON_NAMESPACE::DeserializationError;
+    using ARDUINOJSON_NAMESPACE::deserializeJson;
+    using ARDUINOJSON_NAMESPACE::deserializeMsgPack;
+    using ARDUINOJSON_NAMESPACE::DynamicJsonDocument;
+    using ARDUINOJSON_NAMESPACE::JsonDocument;
+    using ARDUINOJSON_NAMESPACE::measureJson;
+    using ARDUINOJSON_NAMESPACE::serialized;
+    using ARDUINOJSON_NAMESPACE::serializeJson;
+    using ARDUINOJSON_NAMESPACE::serializeJsonPretty;
+    using ARDUINOJSON_NAMESPACE::serializeMsgPack;
+    using ARDUINOJSON_NAMESPACE::StaticJsonDocument;
 
-namespace DeserializationOption {
-using ARDUINOJSON_NAMESPACE::Filter;
-using ARDUINOJSON_NAMESPACE::NestingLimit;
-}  // namespace DeserializationOption
+    namespace DeserializationOption {
+        using ARDUINOJSON_NAMESPACE::Filter;
+        using ARDUINOJSON_NAMESPACE::NestingLimit;
+    }  // namespace DeserializationOption
 }  // namespace ArduinoJson

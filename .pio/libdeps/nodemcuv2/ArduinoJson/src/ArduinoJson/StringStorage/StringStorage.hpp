@@ -9,15 +9,15 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-template <typename TInput>
-StringCopier makeStringStorage(TInput&, MemoryPool& pool) {
-  return StringCopier(pool);
-}
+    template<typename TInput>
+    StringCopier makeStringStorage(TInput &, MemoryPool &pool) {
+        return StringCopier(pool);
+    }
 
-template <typename TChar>
-StringMover makeStringStorage(
-    TChar* input, MemoryPool&,
-    typename enable_if<!is_const<TChar>::value>::type* = 0) {
-  return StringMover(reinterpret_cast<char*>(input));
-}
+    template<typename TChar>
+    StringMover makeStringStorage(
+            TChar *input, MemoryPool &,
+            typename enable_if<!is_const<TChar>::value>::type * = 0) {
+        return StringMover(reinterpret_cast<char *>(input));
+    }
 }  // namespace ARDUINOJSON_NAMESPACE

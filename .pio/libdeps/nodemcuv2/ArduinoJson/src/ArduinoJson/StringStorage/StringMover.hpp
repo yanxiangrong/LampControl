@@ -9,34 +9,34 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-class StringMover {
- public:
-  StringMover(char* ptr) : _writePtr(ptr) {}
+    class StringMover {
+    public:
+        StringMover(char *ptr) : _writePtr(ptr) {}
 
-  void startString() {
-    _startPtr = _writePtr;
-  }
+        void startString() {
+            _startPtr = _writePtr;
+        }
 
-  const char* save() const {
-    return _startPtr;
-  }
+        const char *save() const {
+            return _startPtr;
+        }
 
-  void append(char c) {
-    *_writePtr++ = c;
-  }
+        void append(char c) {
+            *_writePtr++ = c;
+        }
 
-  bool isValid() const {
-    return true;
-  }
+        bool isValid() const {
+            return true;
+        }
 
-  const char* c_str() const {
-    return _startPtr;
-  }
+        const char *c_str() const {
+            return _startPtr;
+        }
 
-  typedef storage_policies::store_by_address storage_policy;
+        typedef storage_policies::store_by_address storage_policy;
 
- private:
-  char* _writePtr;
-  char* _startPtr;
-};
+    private:
+        char *_writePtr;
+        char *_startPtr;
+    };
 }  // namespace ARDUINOJSON_NAMESPACE

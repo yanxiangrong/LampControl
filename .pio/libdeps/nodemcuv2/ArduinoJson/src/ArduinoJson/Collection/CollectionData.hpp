@@ -11,78 +11,84 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-class MemoryPool;
-class VariantData;
-class VariantSlot;
+    class MemoryPool;
 
-class CollectionData {
-  VariantSlot *_head;
-  VariantSlot *_tail;
+    class VariantData;
 
- public:
-  // Must be a POD!
-  // - no constructor
-  // - no destructor
-  // - no virtual
-  // - no inheritance
+    class VariantSlot;
 
-  // Array only
+    class CollectionData {
+        VariantSlot *_head;
+        VariantSlot *_tail;
 
-  VariantData *addElement(MemoryPool *pool);
+    public:
+        // Must be a POD!
+        // - no constructor
+        // - no destructor
+        // - no virtual
+        // - no inheritance
 
-  VariantData *getElement(size_t index) const;
+        // Array only
 
-  VariantData *getOrAddElement(size_t index, MemoryPool *pool);
+        VariantData *addElement(MemoryPool *pool);
 
-  void removeElement(size_t index);
+        VariantData *getElement(size_t index) const;
 
-  bool equalsArray(const CollectionData &other) const;
+        VariantData *getOrAddElement(size_t index, MemoryPool *pool);
 
-  // Object only
+        void removeElement(size_t index);
 
-  template <typename TAdaptedString>
-  VariantData *addMember(TAdaptedString key, MemoryPool *pool);
+        bool equalsArray(const CollectionData &other) const;
 
-  template <typename TAdaptedString>
-  VariantData *getMember(TAdaptedString key) const;
+        // Object only
 
-  template <typename TAdaptedString>
-  VariantData *getOrAddMember(TAdaptedString key, MemoryPool *pool);
+        template<typename TAdaptedString>
+        VariantData *addMember(TAdaptedString key, MemoryPool *pool);
 
-  template <typename TAdaptedString>
-  void removeMember(TAdaptedString key) {
-    removeSlot(getSlot(key));
-  }
+        template<typename TAdaptedString>
+        VariantData *getMember(TAdaptedString key) const;
 
-  template <typename TAdaptedString>
-  bool containsKey(const TAdaptedString &key) const;
+        template<typename TAdaptedString>
+        VariantData *getOrAddMember(TAdaptedString key, MemoryPool *pool);
 
-  bool equalsObject(const CollectionData &other) const;
+        template<typename TAdaptedString>
+        void removeMember(TAdaptedString key) {
+            removeSlot(getSlot(key));
+        }
 
-  // Generic
+        template<typename TAdaptedString>
+        bool containsKey(const TAdaptedString &key) const;
 
-  void clear();
-  size_t memoryUsage() const;
-  size_t nesting() const;
-  size_t size() const;
+        bool equalsObject(const CollectionData &other) const;
 
-  VariantSlot *addSlot(MemoryPool *);
-  void removeSlot(VariantSlot *slot);
+        // Generic
 
-  bool copyFrom(const CollectionData &src, MemoryPool *pool);
+        void clear();
 
-  VariantSlot *head() const {
-    return _head;
-  }
+        size_t memoryUsage() const;
 
-  void movePointers(ptrdiff_t stringDistance, ptrdiff_t variantDistance);
+        size_t nesting() const;
 
- private:
-  VariantSlot *getSlot(size_t index) const;
+        size_t size() const;
 
-  template <typename TAdaptedString>
-  VariantSlot *getSlot(TAdaptedString key) const;
+        VariantSlot *addSlot(MemoryPool *);
 
-  VariantSlot *getPreviousSlot(VariantSlot *) const;
-};
+        void removeSlot(VariantSlot *slot);
+
+        bool copyFrom(const CollectionData &src, MemoryPool *pool);
+
+        VariantSlot *head() const {
+            return _head;
+        }
+
+        void movePointers(ptrdiff_t stringDistance, ptrdiff_t variantDistance);
+
+    private:
+        VariantSlot *getSlot(size_t index) const;
+
+        template<typename TAdaptedString>
+        VariantSlot *getSlot(TAdaptedString key) const;
+
+        VariantSlot *getPreviousSlot(VariantSlot *) const;
+    };
 }  // namespace ARDUINOJSON_NAMESPACE

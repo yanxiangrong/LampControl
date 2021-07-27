@@ -10,45 +10,45 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-template <typename TResult>
-struct Visitor {
-  typedef TResult result_type;
+    template<typename TResult>
+    struct Visitor {
+        typedef TResult result_type;
 
-  TResult visitArray(const CollectionData &) {
-    return TResult();
-  }
+        TResult visitArray(const CollectionData &) {
+            return TResult();
+        }
 
-  TResult visitBoolean(bool) {
-    return TResult();
-  }
+        TResult visitBoolean(bool) {
+            return TResult();
+        }
 
-  TResult visitFloat(Float) {
-    return TResult();
-  }
+        TResult visitFloat(Float) {
+            return TResult();
+        }
 
-  TResult visitSignedInteger(Integer) {
-    return TResult();
-  }
+        TResult visitSignedInteger(Integer) {
+            return TResult();
+        }
 
-  TResult visitNull() {
-    return TResult();
-  }
+        TResult visitNull() {
+            return TResult();
+        }
 
-  TResult visitObject(const CollectionData &) {
-    return TResult();
-  }
+        TResult visitObject(const CollectionData &) {
+            return TResult();
+        }
 
-  TResult visitUnsignedInteger(UInt) {
-    return TResult();
-  }
+        TResult visitUnsignedInteger(UInt) {
+            return TResult();
+        }
 
-  TResult visitRawJson(const char *, size_t) {
-    return TResult();
-  }
+        TResult visitRawJson(const char *, size_t) {
+            return TResult();
+        }
 
-  TResult visitString(const char *) {
-    return TResult();
-  }
-};
+        TResult visitString(const char *) {
+            return TResult();
+        }
+    };
 
 }  // namespace ARDUINOJSON_NAMESPACE

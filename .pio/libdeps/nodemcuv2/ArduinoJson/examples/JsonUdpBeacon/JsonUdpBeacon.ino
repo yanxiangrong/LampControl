@@ -30,60 +30,60 @@ unsigned short localPort = 8888;
 EthernetUDP udp;
 
 void setup() {
-  // Initialize serial port
-  Serial.begin(9600);
-  while (!Serial) continue;
+    // Initialize serial port
+    Serial.begin(9600);
+    while (!Serial) continue;
 
-  // Initialize Ethernet libary
-  if (!Ethernet.begin(mac)) {
-    Serial.println(F("Failed to initialize Ethernet library"));
-    return;
-  }
+    // Initialize Ethernet libary
+    if (!Ethernet.begin(mac)) {
+        Serial.println(F("Failed to initialize Ethernet library"));
+        return;
+    }
 
-  // Enable UDP
-  udp.begin(localPort);
+    // Enable UDP
+    udp.begin(localPort);
 }
 
 void loop() {
-  // Allocate a temporary JsonDocument
-  // Use https://arduinojson.org/v6/assistant to compute the capacity.
-  StaticJsonDocument<500> doc;
+    // Allocate a temporary JsonDocument
+    // Use https://arduinojson.org/v6/assistant to compute the capacity.
+    StaticJsonDocument<500> doc;
 
-  // Create the "analog" array
-  JsonArray analogValues = doc.createNestedArray("analog");
-  for (int pin = 0; pin < 6; pin++) {
-    // Read the analog input
-    int value = analogRead(pin);
+    // Create the "analog" array
+    JsonArray analogValues = doc.createNestedArray("analog");
+    for (int pin = 0; pin < 6; pin++) {
+        // Read the analog input
+        int value = analogRead(pin);
 
-    // Add the value at the end of the array
-    analogValues.add(value);
-  }
+        // Add the value at the end of the array
+        analogValues.add(value);
+    }
 
-  // Create the "digital" array
-  JsonArray digitalValues = doc.createNestedArray("digital");
-  for (int pin = 0; pin < 14; pin++) {
-    // Read the digital input
-    int value = digitalRead(pin);
+    // Create the "digital" array
+    JsonArray digitalValues = doc.createNestedArray("digital");
+    for (int pin = 0; pin < 14; pin++) {
+        // Read the digital input
+        int value = digitalRead(pin);
 
-    // Add the value at the end of the array
-    digitalValues.add(value);
-  }
+        // Add the value at the end of the array
+        digitalValues.add(value);
+    }
 
-  // Log
-  Serial.print(F("Sending to "));
-  Serial.print(remoteIp);
-  Serial.print(F(" on port "));
-  Serial.println(remotePort);
-  serializeJson(doc, Serial);
+    // Log
+    Serial.print(F("Sending to "));
+    Serial.print(remoteIp);
+    Serial.print(F(" on port "));
+    Serial.println(remotePort);
+    serializeJson(doc, Serial);
 
-  // Send UDP packet
-  udp.beginPacket(remoteIp, remotePort);
-  serializeJson(doc, udp);
-  udp.println();
-  udp.endPacket();
+    // Send UDP packet
+    udp.beginPacket(remoteIp, remotePort);
+    serializeJson(doc, udp);
+    udp.println();
+    udp.endPacket();
 
-  // Wait
-  delay(10000);
+    // Wait
+    delay(10000);
 }
 
 // Performance issue?

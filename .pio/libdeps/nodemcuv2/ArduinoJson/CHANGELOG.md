@@ -15,7 +15,8 @@ v6.18.1 (2021-07-03)
 * Fixed clang-tidy warnings (issue #1574, PR #1577 by @armandas)
 * Added fake class `InvalidConversion<T1,T2>` to easily identify invalid conversions (issue #1585)
 * Added support for `std::string_view` (issue #1578, PR #1554 by @0xFEEDC0DE64)
-* Fixed warning `definition of implicit copy constructor for 'MsgPackDeserializer' is deprecated because it has a user-declared copy assignment operator`
+* Fixed
+  warning `definition of implicit copy constructor for 'MsgPackDeserializer' is deprecated because it has a user-declared copy assignment operator`
 * Added `JsonArray::clear()` (issue #1597)
 * Fixed `JsonVariant::as<unsigned>()` (issue #1601)
 * Added support for ESP-IDF component build (PR #1562 by @qt1, PR #1599 by @andreaskuster)
@@ -77,7 +78,7 @@ v6.18.0 (2021-05-05)
 > ```c++
 > Serial.println(doc["sensor"].as<char*>());  // error: invalid conversion from 'const char*' to 'char*' [-fpermissive]
 > ```
-> 
+>
 > Instead, you must write:
 >
 > ```c++
@@ -113,8 +114,8 @@ v6.17.2 (2020-11-14)
 -------
 
 * Fixed invalid conversion error in `operator|(JsonVariant, char*)` (issue #1432)
-* Changed the default value of `ARDUINOJSON_ENABLE_PROGMEM` (issue #1433).
-  It now checks that the `pgm_read_XXX` macros are defined before enabling `PROGMEM`.
+* Changed the default value of `ARDUINOJSON_ENABLE_PROGMEM` (issue #1433). It now checks that the `pgm_read_XXX` macros
+  are defined before enabling `PROGMEM`.
 
 v6.17.1 (2020-11-07)
 -------
@@ -192,7 +193,7 @@ v6.15.0 (2020-03-22)
 * Removed copy-constructor of `JsonDocument` (issue #1189)
 
 > ### BREAKING CHANGES
-> 
+>
 > #### Copy-constructor of `BasicJsonDocument`
 >
 > In previous versions, the copy constructor of `BasicJsonDocument` looked at the source's `memoryUsage()` to choose its capacity.
@@ -248,15 +249,16 @@ v6.14.0 (2020-01-16)
 * Improved decoding of UTF-16 surrogate pairs (PR #1157 by @kaysievers)
   (ArduinoJson now produces standard UTF-8 instead of CESU-8)
 * Added `measureJson`, `measureJsonPretty`, and `measureMsgPack` to `keywords.txt`
-  (This file is used for syntax highlighting in the Arduino IDE) 
+  (This file is used for syntax highlighting in the Arduino IDE)
 * Fixed `variant.is<nullptr_t>()`
-* Fixed value returned by `serializeJson()`, `serializeJsonPretty()`, and `serializeMsgPack()` when writing to a `String`
+* Fixed value returned by `serializeJson()`, `serializeJsonPretty()`, and `serializeMsgPack()` when writing to
+  a `String`
 * Improved speed of `serializeJson()`, `serializeJsonPretty()`, and `serializeMsgPack()` when writing to a `String`
 
 > ### BREAKING CHANGES
-> 
+>
 > #### Comments
-> 
+>
 > Support for comments in input is now optional and disabled by default.
 >
 > If you need support for comments, you must defined `ARDUINOJSON_ENABLE_COMMENTS` to `1`; otherwise, you'll receive `InvalidInput` errors.
@@ -301,7 +303,8 @@ v6.11.3 (2019-07-22)
 -------
 
 * Added operators `==` and `!=` for `JsonDocument`, `ElementProxy`, and `MemberProxy`
-* Fixed comparison of `JsonVariant` when one contains a linked string and the other contains an owned string (issue #1051)
+* Fixed comparison of `JsonVariant` when one contains a linked string and the other contains an owned string (issue
+  #1051)
 
 v6.11.2 (2019-07-08)
 -------
@@ -327,34 +330,34 @@ v6.11.0 (2019-05-26)
 * Added support for `nullptr` (issue #998)
 
 > ### BREAKING CHANGES
-> 
+>
 > #### NaN and Infinity
-> 
+>
 > The JSON specification allows neither NaN not Infinity, but previous
 > versions of ArduinoJson supported it. Now, ArduinoJson behaves like most
 > other libraries: a NaN or and Infinity in the `JsonDocument`, becomes
 > a `null` in the output JSON. Also, `deserializeJson()` returns
 > `InvalidInput` if the JSON document contains NaN or Infinity.
-> 
+>
 > This version still supports NaN and Infinity in JSON documents, but
 > it's disabled by default to be compatible with other JSON parsers.
 > If you need the old behavior back, define `ARDUINOJSON_ENABLE_NAN` and
 > `ARDUINOJSON_ENABLE_INFINITY` to `1`;:
-> 
+>
 > ```c++
 > #define ARDUINOJSON_ENABLE_NAN 1
 > #define ARDUINOJSON_ENABLE_INFINITY 1
 > #include <ArduinoJson.h>
 > ```
-> 
+>
 > #### The "or" operator
-> 
-> This version slightly changes the behavior of the | operator when the 
+>
+> This version slightly changes the behavior of the | operator when the
 > variant contains a float and the user requests an integer.
 >
 > Older versions returned the floating point value truncated.
 > Now, it returns the default value.
-> 
+>
 > ```c++
 > // suppose variant contains 1.2
 > int value = variant | 3;
@@ -365,7 +368,7 @@ v6.11.0 (2019-05-26)
 > // new behavior
 > value == 3
 > ```
-> 
+>
 > If you need the old behavior, you must add `if (variant.is<float>())`.
 
 v6.10.1 (2019-04-23)
@@ -380,8 +383,8 @@ v6.10.0 (2019-03-22)
 
 * Fixed an integer overflow in the JSON deserializer
 * Added overflow handling in `JsonVariant::as<T>()` and `JsonVariant::is<T>()`.
-   - `as<T>()` returns `0` if the integer `T` overflows
-   - `is<T>()` returns `false` if the integer `T` overflows
+    - `as<T>()` returns `0` if the integer `T` overflows
+    - `is<T>()` returns `false` if the integer `T` overflows
 * Added `BasicJsonDocument` to support custom allocator (issue #876)
 * Added `JsonDocument::containsKey()` (issue #938)
 * Added `JsonVariant::containsKey()`
@@ -390,12 +393,12 @@ v6.9.1 (2019-03-01)
 ------
 
 * Fixed warning "unused variable" with GCC 4.4 (issue #912)
-* Fixed warning "cast  increases required alignment" (issue #914)
+* Fixed warning "cast increases required alignment" (issue #914)
 * Fixed warning "conversion may alter value" (issue #914)
 * Fixed naming conflict with "CAPACITY" (issue #839)
 * Muted warning "will change in GCC 7.1" (issue #914)
 * Added a clear error message for `StaticJsonBuffer` and `DynamicJsonBuffer`
-* Marked ArduinoJson.h  as a "system header"
+* Marked ArduinoJson.h as a "system header"
 
 v6.9.0 (2019-02-26)
 ------
@@ -428,28 +431,29 @@ v6.8.0-beta (2019-01-30)
 * `JsonDocument` was missing in the ArduinoJson namespace
 * Added `memoryUsage()` to `JsonArray`, `JsonObject`, and `JsonVariant`
 * Added `nesting()` to `JsonArray`, `JsonDocument`, `JsonObject`, and `JsonVariant`
-* Replaced `JsonDocument::nestingLimit` with an additional parameter
-  to `deserializeJson()` and `deserializeMsgPack()`
+* Replaced `JsonDocument::nestingLimit` with an additional parameter to `deserializeJson()` and `deserializeMsgPack()`
 * Fixed uninitialized variant in `JsonDocument`
 * Fixed `StaticJsonDocument` copy constructor and copy assignment
-* The copy constructor of `DynamicJsonDocument` chooses the capacity according to the memory usage of the source, not from the capacity of the source.
-* Added the ability to create/assign a `StaticJsonDocument`/`DynamicJsonDocument` from a `JsonArray`/`JsonObject`/`JsonVariant`
+* The copy constructor of `DynamicJsonDocument` chooses the capacity according to the memory usage of the source, not
+  from the capacity of the source.
+* Added the ability to create/assign a `StaticJsonDocument`/`DynamicJsonDocument` from a `JsonArray`/`JsonObject`
+  /`JsonVariant`
 * Added `JsonDocument::isNull()`
 * Added `JsonDocument::operator[]`
 * Added `ARDUINOJSON_TAB` to configure the indentation character
 * Reduced the size of the pretty JSON serializer
 * Added `add()`, `createNestedArray()` and `createNestedObject()` to `JsonVariant`
-* `JsonVariant` automatically promotes to `JsonObject` or `JsonArray` on write.
-  Calling `JsonVariant::to<T>()` is not required anymore.
-* `JsonDocument` now support the same operations as `JsonVariant`.
-  Calling `JsonDocument::as<T>()` is not required anymore.
+* `JsonVariant` automatically promotes to `JsonObject` or `JsonArray` on write. Calling `JsonVariant::to<T>()` is not
+  required anymore.
+* `JsonDocument` now support the same operations as `JsonVariant`. Calling `JsonDocument::as<T>()` is not required
+  anymore.
 * Fixed example `JsonHttpClient.ino`
 * User can now use a `JsonString` as a key or a value
 
 > ### BREAKING CHANGES
-> 
+>
 > #### `DynamicJsonDocument`'s constructor
-> 
+>
 > The parameter to the constructor of `DynamicJsonDocument` is now mandatory
 >
 > Old code:
@@ -463,20 +467,20 @@ v6.8.0-beta (2019-01-30)
 > ```c++
 > DynamicJsonDocument doc(1024);
 > ```
-> 
+>
 > #### Nesting limit
-> 
+>
 > `JsonDocument::nestingLimit` was replaced with a new parameter to `deserializeJson()` and `deserializeMsgPack()`.
-> 
+>
 > Old code:
-> 
+>
 > ```c++
 > doc.nestingLimit = 15;
 > deserializeJson(doc, input);
 > ```
-> 
-> New code: 
-> 
+>
+> New code:
+>
 > ```c++
 > deserializeJson(doc, input, DeserializationOption::NestingLimit(15));
 > ```
@@ -530,7 +534,7 @@ v6.3.0-beta (2018-08-31)
 > ### BREAKING CHANGES
 >
 > #### JsonVariant
-> 
+>
 > `JsonVariant` now has a semantic similar to `JsonObject` and `JsonArray`.
 > It's a reference to a value stored in the `JsonDocument`.
 > As a consequence, a `JsonVariant` cannot be used as a standalone variable anymore.
@@ -610,9 +614,9 @@ v6.2.0-beta (2018-07-12)
 > ```c++
 > object["values"] = RawJson("[1,2,3,4]");
 > ```
-> 
+>
 > New code:
-> 
+>
 > ```c++
 > object["values"] = serialized("[1,2,3,4]");
 > ```
@@ -624,7 +628,7 @@ v6.1.0-beta (2018-07-02)
 * Replaced `success()` with `isNull()`
 
 > ### BREAKING CHANGES
-> 
+>
 > Old code:
 >
 > ```c++
@@ -635,9 +639,9 @@ v6.1.0-beta (2018-07-02)
 >   return;
 > }
 > ```
-> 
+>
 > New code:
-> 
+>
 > ```c++
 > JsonObject obj = doc.to<JsonObject>();
 > JsonArray arr = obj.createNestedArray("key");
@@ -669,11 +673,11 @@ v6.0.0-beta (2018-06-07)
 * Removed all deprecated features
 
 > ### BREAKING CHANGES
-> 
+>
 > #### Deserialization
-> 
+>
 > Old code:
-> 
+>
 > ```c++
 > DynamicJsonBuffer jb;
 > JsonObject& obj = jb.parseObject(json);
@@ -681,9 +685,9 @@ v6.0.0-beta (2018-06-07)
 > 
 > }
 > ```
-> 
+>
 > New code:
-> 
+>
 > ```c++
 > DynamicJsonDocument doc;
 > DeserializationError error = deserializeJson(doc, json);
@@ -692,20 +696,20 @@ v6.0.0-beta (2018-06-07)
 > }
 > JsonObject& obj = doc.as<JsonObject>();
 > ```
-> 
+>
 > #### Serialization
-> 
+>
 > Old code:
-> 
+>
 > ```c++
 > DynamicJsonBuffer jb;
 > JsonObject& obj = jb.createObject();
 > obj["key"] = "value";
 > obj.printTo(Serial);
 > ```
-> 
+>
 > New code:
-> 
+>
 > ```c++
 > DynamicJsonDocument obj;
 > JsonObject& obj = doc.to<JsonObject>();
@@ -932,7 +936,8 @@ v5.7.0
 * Removed `JsonVariant::defaultValue<T>()`
 * Removed non-template `JsonObject::get()` and `JsonArray.get()`
 * Fixed support for `StringSumHelper` (issue #184)
-* Replaced `ARDUINOJSON_USE_ARDUINO_STRING` by `ARDUINOJSON_ENABLE_STD_STRING` and `ARDUINOJSON_ENABLE_ARDUINO_STRING` (issue #378)
+* Replaced `ARDUINOJSON_USE_ARDUINO_STRING` by `ARDUINOJSON_ENABLE_STD_STRING` and `ARDUINOJSON_ENABLE_ARDUINO_STRING` (
+  issue #378)
 * Added example `StringExample.ino` to show where `String` can be used
 * Increased default nesting limit to 50 when compiled for a computer (issue #349)
 
@@ -970,7 +975,8 @@ v5.6.6
 
 * Fixed `-Wparentheses` warning introduced in v5.6.5 (PR #335 by @nuket)
 * Added `.mbedignore` for ARM mbdeb (PR #334 by @nuket)
-* Fixed  `JsonVariant::success()` which didn't propagate `JsonArray::success()` nor `JsonObject::success()` (issue #342).
+* Fixed  `JsonVariant::success()` which didn't propagate `JsonArray::success()` nor `JsonObject::success()` (issue #342)
+  .
 
 v5.6.5
 ------
@@ -1127,8 +1133,7 @@ v5.0.0
 > - Number of digits of floating point value are now set with `double_with_n_digits()`
 
 **Personal note about the `String` class**:
-Support of the `String` class has been added to the library because many people use it in their programs.
-However, you should not see this as an invitation to use the `String` class.
-The `String` class is **bad** because it uses dynamic memory allocation.
-Compared to static allocation, it compiles to a bigger, slower program, and is less predictable.
-You certainly don't want that in an embedded environment!
+Support of the `String` class has been added to the library because many people use it in their programs. However, you
+should not see this as an invitation to use the `String` class. The `String` class is **bad** because it uses dynamic
+memory allocation. Compared to static allocation, it compiles to a bigger, slower program, and is less predictable. You
+certainly don't want that in an embedded environment!

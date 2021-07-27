@@ -8,49 +8,49 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-template <typename TReader>
-class Latch {
- public:
-  Latch(TReader reader) : _reader(reader), _loaded(false) {
+    template<typename TReader>
+    class Latch {
+    public:
+        Latch(TReader reader) : _reader(reader), _loaded(false) {
 #if ARDUINOJSON_DEBUG
-    _ended = false;
+            _ended = false;
 #endif
-  }
+        }
 
-  void clear() {
-    _loaded = false;
-  }
+        void clear() {
+            _loaded = false;
+        }
 
-  int last() const {
-    return _current;
-  }
+        int last() const {
+            return _current;
+        }
 
-  FORCE_INLINE char current() {
-    if (!_loaded) {
-      load();
-    }
-    return _current;
-  }
+        FORCE_INLINE char current() {
+            if (!_loaded) {
+                load();
+            }
+            return _current;
+        }
 
- private:
-  void load() {
-    ARDUINOJSON_ASSERT(!_ended);
-    int c = _reader.read();
+    private:
+        void load() {
+            ARDUINOJSON_ASSERT(!_ended);
+            int c = _reader.read();
 #if ARDUINOJSON_DEBUG
-    if (c <= 0)
-      _ended = true;
+            if (c <= 0)
+              _ended = true;
 #endif
-    _current = static_cast<char>(c > 0 ? c : 0);
-    _loaded = true;
-  }
+            _current = static_cast<char>(c > 0 ? c : 0);
+            _loaded = true;
+        }
 
-  TReader _reader;
-  char _current;  // NOLINT(clang-analyzer-optin.cplusplus.UninitializedObject)
-                  // Not initialized in constructor (+10 bytes on AVR)
-  bool _loaded;
+        TReader _reader;
+        char _current;  // NOLINT(clang-analyzer-optin.cplusplus.UninitializedObject)
+        // Not initialized in constructor (+10 bytes on AVR)
+        bool _loaded;
 #if ARDUINOJSON_DEBUG
-  bool _ended;
+        bool _ended;
 #endif
-};
+    };
 
 }  // namespace ARDUINOJSON_NAMESPACE

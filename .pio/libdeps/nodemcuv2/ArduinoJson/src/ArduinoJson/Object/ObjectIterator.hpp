@@ -9,115 +9,117 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-class PairPtr {
- public:
-  PairPtr(MemoryPool *pool, VariantSlot *slot) : _pair(pool, slot) {}
+    class PairPtr {
+    public:
+        PairPtr(MemoryPool *pool, VariantSlot *slot) : _pair(pool, slot) {}
 
-  const Pair *operator->() const {
-    return &_pair;
-  }
+        const Pair *operator->() const {
+            return &_pair;
+        }
 
-  const Pair &operator*() const {
-    return _pair;
-  }
+        const Pair &operator*() const {
+            return _pair;
+        }
 
- private:
-  Pair _pair;
-};
+    private:
+        Pair _pair;
+    };
 
-class ObjectIterator {
- public:
-  ObjectIterator() : _slot(0) {}
+    class ObjectIterator {
+    public:
+        ObjectIterator() : _slot(0) {}
 
-  explicit ObjectIterator(MemoryPool *pool, VariantSlot *slot)
-      : _pool(pool), _slot(slot) {}
+        explicit ObjectIterator(MemoryPool *pool, VariantSlot *slot)
+                : _pool(pool), _slot(slot) {}
 
-  Pair operator*() const {
-    return Pair(_pool, _slot);
-  }
-  PairPtr operator->() {
-    return PairPtr(_pool, _slot);
-  }
+        Pair operator*() const {
+            return Pair(_pool, _slot);
+        }
 
-  bool operator==(const ObjectIterator &other) const {
-    return _slot == other._slot;
-  }
+        PairPtr operator->() {
+            return PairPtr(_pool, _slot);
+        }
 
-  bool operator!=(const ObjectIterator &other) const {
-    return _slot != other._slot;
-  }
+        bool operator==(const ObjectIterator &other) const {
+            return _slot == other._slot;
+        }
 
-  ObjectIterator &operator++() {
-    _slot = _slot->next();
-    return *this;
-  }
+        bool operator!=(const ObjectIterator &other) const {
+            return _slot != other._slot;
+        }
 
-  ObjectIterator &operator+=(size_t distance) {
-    _slot = _slot->next(distance);
-    return *this;
-  }
+        ObjectIterator &operator++() {
+            _slot = _slot->next();
+            return *this;
+        }
 
-  VariantSlot *internal() {
-    return _slot;
-  }
+        ObjectIterator &operator+=(size_t distance) {
+            _slot = _slot->next(distance);
+            return *this;
+        }
 
- private:
-  MemoryPool *_pool;
-  VariantSlot *_slot;
-};
+        VariantSlot *internal() {
+            return _slot;
+        }
 
-class PairConstPtr {
- public:
-  PairConstPtr(const VariantSlot *slot) : _pair(slot) {}
+    private:
+        MemoryPool *_pool;
+        VariantSlot *_slot;
+    };
 
-  const PairConst *operator->() const {
-    return &_pair;
-  }
+    class PairConstPtr {
+    public:
+        PairConstPtr(const VariantSlot *slot) : _pair(slot) {}
 
-  const PairConst &operator*() const {
-    return _pair;
-  }
+        const PairConst *operator->() const {
+            return &_pair;
+        }
 
- private:
-  PairConst _pair;
-};
+        const PairConst &operator*() const {
+            return _pair;
+        }
 
-class ObjectConstIterator {
- public:
-  ObjectConstIterator() : _slot(0) {}
+    private:
+        PairConst _pair;
+    };
 
-  explicit ObjectConstIterator(const VariantSlot *slot) : _slot(slot) {}
+    class ObjectConstIterator {
+    public:
+        ObjectConstIterator() : _slot(0) {}
 
-  PairConst operator*() const {
-    return PairConst(_slot);
-  }
-  PairConstPtr operator->() {
-    return PairConstPtr(_slot);
-  }
+        explicit ObjectConstIterator(const VariantSlot *slot) : _slot(slot) {}
 
-  bool operator==(const ObjectConstIterator &other) const {
-    return _slot == other._slot;
-  }
+        PairConst operator*() const {
+            return PairConst(_slot);
+        }
 
-  bool operator!=(const ObjectConstIterator &other) const {
-    return _slot != other._slot;
-  }
+        PairConstPtr operator->() {
+            return PairConstPtr(_slot);
+        }
 
-  ObjectConstIterator &operator++() {
-    _slot = _slot->next();
-    return *this;
-  }
+        bool operator==(const ObjectConstIterator &other) const {
+            return _slot == other._slot;
+        }
 
-  ObjectConstIterator &operator+=(size_t distance) {
-    _slot = _slot->next(distance);
-    return *this;
-  }
+        bool operator!=(const ObjectConstIterator &other) const {
+            return _slot != other._slot;
+        }
 
-  const VariantSlot *internal() {
-    return _slot;
-  }
+        ObjectConstIterator &operator++() {
+            _slot = _slot->next();
+            return *this;
+        }
 
- private:
-  const VariantSlot *_slot;
-};
+        ObjectConstIterator &operator+=(size_t distance) {
+            _slot = _slot->next(distance);
+            return *this;
+        }
+
+        const VariantSlot *internal() {
+            return _slot;
+        }
+
+    private:
+        const VariantSlot *_slot;
+    };
 }  // namespace ARDUINOJSON_NAMESPACE

@@ -29,10 +29,10 @@
 // Small or big machine?
 #ifndef ARDUINOJSON_EMBEDDED_MODE
 #  if defined(ARDUINO)                /* Arduino*/                 \
-      || defined(__IAR_SYSTEMS_ICC__) /* IAR Embedded Workbench */ \
-      || defined(__XC)                /* MPLAB XC compiler */      \
-      || defined(__ARMCC_VERSION)     /* Keil ARM Compiler */      \
-      || defined(__AVR)               /* Atmel AVR8/GNU C Compiler */
+ || defined(__IAR_SYSTEMS_ICC__) /* IAR Embedded Workbench */ \
+ || defined(__XC)                /* MPLAB XC compiler */      \
+ || defined(__ARMCC_VERSION)     /* Keil ARM Compiler */      \
+ || defined(__AVR)               /* Atmel AVR8/GNU C Compiler */
 #    define ARDUINOJSON_EMBEDDED_MODE 1
 #  else
 #    define ARDUINOJSON_EMBEDDED_MODE 0
@@ -229,8 +229,8 @@
 #endif
 
 #ifndef ARDUINOJSON_LITTLE_ENDIAN
-#  if defined(_MSC_VER) ||                           \
-      (defined(__BYTE_ORDER__) &&                    \
+#  if defined(_MSC_VER) || \
+      (defined(__BYTE_ORDER__) && \
        __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__) || \
       defined(__LITTLE_ENDIAN__) || defined(__i386) || defined(__x86_64)
 #    define ARDUINOJSON_LITTLE_ENDIAN 1

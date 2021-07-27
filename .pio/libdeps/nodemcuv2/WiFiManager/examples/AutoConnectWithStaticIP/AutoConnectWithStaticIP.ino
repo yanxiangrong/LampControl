@@ -24,57 +24,57 @@
 //char static_sn[16] = "255.255.255.0";
 
 void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(115200);
-  Serial.println();
+    // put your setup code here, to run once:
+    Serial.begin(115200);
+    Serial.println();
 
-  //WiFiManager
-  //Local intialization. Once its business is done, there is no need to keep it around
-  WiFiManager wifiManager;
+    //WiFiManager
+    //Local intialization. Once its business is done, there is no need to keep it around
+    WiFiManager wifiManager;
 
-  //reset settings - for testing
-  //wifiManager.resetSettings();
+    //reset settings - for testing
+    //wifiManager.resetSettings();
 
-  //set static ip
-  //block1 should be used for ESP8266 core 2.1.0 or newer, otherwise use block2
+    //set static ip
+    //block1 should be used for ESP8266 core 2.1.0 or newer, otherwise use block2
 
-  //start-block1
-  //IPAddress _ip,_gw,_sn;
-  //_ip.fromString(static_ip);
-  //_gw.fromString(static_gw);
-  //_sn.fromString(static_sn);
-  //end-block1
+    //start-block1
+    //IPAddress _ip,_gw,_sn;
+    //_ip.fromString(static_ip);
+    //_gw.fromString(static_gw);
+    //_sn.fromString(static_sn);
+    //end-block1
 
-  //start-block2
-  IPAddress _ip = IPAddress(10, 0, 1, 78);
-  IPAddress _gw = IPAddress(10, 0, 1, 1);
-  IPAddress _sn = IPAddress(255, 255, 255, 0);
-  //end-block2
-  
-  wifiManager.setSTAStaticIPConfig(_ip, _gw, _sn);
+    //start-block2
+    IPAddress _ip = IPAddress(10, 0, 1, 78);
+    IPAddress _gw = IPAddress(10, 0, 1, 1);
+    IPAddress _sn = IPAddress(255, 255, 255, 0);
+    //end-block2
 
-
-  //tries to connect to last known settings
-  //if it does not connect it starts an access point with the specified name
-  //here  "AutoConnectAP" with password "password"
-  //and goes into a blocking loop awaiting configuration
-  if (!wifiManager.autoConnect("AutoConnectAP", "password")) {
-    Serial.println("failed to connect, we should reset as see if it connects");
-    delay(3000);
-    ESP.reset();
-    delay(5000);
-  }
-
-  //if you get here you have connected to the WiFi
-  Serial.println("connected...yeey :)");
+    wifiManager.setSTAStaticIPConfig(_ip, _gw, _sn);
 
 
-  Serial.println("local ip");
-  Serial.println(WiFi.localIP());
+    //tries to connect to last known settings
+    //if it does not connect it starts an access point with the specified name
+    //here  "AutoConnectAP" with password "password"
+    //and goes into a blocking loop awaiting configuration
+    if (!wifiManager.autoConnect("AutoConnectAP", "password")) {
+        Serial.println("failed to connect, we should reset as see if it connects");
+        delay(3000);
+        ESP.reset();
+        delay(5000);
+    }
+
+    //if you get here you have connected to the WiFi
+    Serial.println("connected...yeey :)");
+
+
+    Serial.println("local ip");
+    Serial.println(WiFi.localIP());
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+    // put your main code here, to run repeatedly:
 
 
 }

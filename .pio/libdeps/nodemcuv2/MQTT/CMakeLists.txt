@@ -19,21 +19,21 @@ include_directories(src/)
 set(CMAKE_CXX_FLAGS -std=c++11)
 
 set(SOURCE_FILES
-    examples/AdafruitHuzzahESP8266/AdafruitHuzzahESP8266.ino
+        examples/AdafruitHuzzahESP8266/AdafruitHuzzahESP8266.ino
         examples/AdafruitHuzzahESP8266Secure/AdafruitHuzzahESP8266Secure.ino
-    examples/ArduinoEthernetShield/ArduinoEthernetShield.ino
-    examples/ArduinoMKRGSM1400/ArduinoMKRGSM1400.ino
+        examples/ArduinoEthernetShield/ArduinoEthernetShield.ino
+        examples/ArduinoMKRGSM1400/ArduinoMKRGSM1400.ino
         examples/ArduinoMKRGSM1400Secure/ArduinoMKRGSM1400Secure.ino
-    examples/ArduinoWiFi101/ArduinoWiFi101.ino
+        examples/ArduinoWiFi101/ArduinoWiFi101.ino
         examples/ArduinoWiFi101Secure/ArduinoWiFi101Secure.ino
-    examples/ArduinoWiFiShield/ArduinoWiFiShield.ino
-    examples/ArduinoYun/ArduinoYun.ino
+        examples/ArduinoWiFiShield/ArduinoWiFiShield.ino
+        examples/ArduinoYun/ArduinoYun.ino
         examples/ArduinoYunSecure/ArduinoYunSecure.ino
-    examples/ESP32DevelopmentBoard/ESP32DevelopmentBoard.ino
+        examples/ESP32DevelopmentBoard/ESP32DevelopmentBoard.ino
         examples/ESP32DevelopmentBoardSecure/ESP32DevelopmentBoardSecure.ino
-    src/lwmqtt
-    src/MQTT.h
-    src/MQTTClient.h
-    src/MQTTClient.cpp)
+        src/lwmqtt
+        src/MQTT.h
+        src/MQTTClient.h
+        src/MQTTClient.cpp)
 
 add_executable(arduino-mqtt ${SOURCE_FILES})

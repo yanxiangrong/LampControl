@@ -10,68 +10,70 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-class String {
- public:
-  String() : _data(0), _isStatic(true) {}
-  String(const char* data, bool isStaticData = true)
-      : _data(data), _isStatic(isStaticData) {}
+    class String {
+    public:
+        String() : _data(0), _isStatic(true) {}
 
-  const char* c_str() const {
-    return _data;
-  }
+        String(const char *data, bool isStaticData = true)
+                : _data(data), _isStatic(isStaticData) {}
 
-  bool isNull() const {
-    return !_data;
-  }
+        const char *c_str() const {
+            return _data;
+        }
 
-  bool isStatic() const {
-    return _isStatic;
-  }
+        bool isNull() const {
+            return !_data;
+        }
 
-  friend bool operator==(String lhs, String rhs) {
-    if (lhs._data == rhs._data)
-      return true;
-    if (!lhs._data)
-      return false;
-    if (!rhs._data)
-      return false;
-    return strcmp(lhs._data, rhs._data) == 0;
-  }
+        bool isStatic() const {
+            return _isStatic;
+        }
 
-  friend bool operator!=(String lhs, String rhs) {
-    if (lhs._data == rhs._data)
-      return false;
-    if (!lhs._data)
-      return true;
-    if (!rhs._data)
-      return true;
-    return strcmp(lhs._data, rhs._data) != 0;
-  }
+        friend bool operator==(String lhs, String rhs) {
+            if (lhs._data == rhs._data)
+                return true;
+            if (!lhs._data)
+                return false;
+            if (!rhs._data)
+                return false;
+            return strcmp(lhs._data, rhs._data) == 0;
+        }
 
- private:
-  const char* _data;
-  bool _isStatic;
-};
+        friend bool operator!=(String lhs, String rhs) {
+            if (lhs._data == rhs._data)
+                return false;
+            if (!lhs._data)
+                return true;
+            if (!rhs._data)
+                return true;
+            return strcmp(lhs._data, rhs._data) != 0;
+        }
 
-class StringAdapter : public RamStringAdapter {
- public:
-  StringAdapter(const String& str)
-      : RamStringAdapter(str.c_str()), _isStatic(str.isStatic()) {}
+    private:
+        const char *_data;
+        bool _isStatic;
+    };
 
-  bool isStatic() const {
-    return _isStatic;
-  }
+    class StringAdapter : public RamStringAdapter {
+    public:
+        StringAdapter(const String &str)
+                : RamStringAdapter(str.c_str()), _isStatic(str.isStatic()) {}
 
-  typedef storage_policies::decide_at_runtime storage_policy;
+        bool isStatic() const {
+            return _isStatic;
+        }
 
- private:
-  bool _isStatic;
-};
+        typedef storage_policies::decide_at_runtime storage_policy;
 
-template <>
-struct IsString<String> : true_type {};
+    private:
+        bool _isStatic;
+    };
 
-inline StringAdapter adaptString(const String& str) {
-  return StringAdapter(str);
-}
+    template<>
+    struct IsString<String> : true_type {
+    };
+
+    inline StringAdapter adaptString(const String &str) {
+        return StringAdapter(str);
+    }
 }  // namespace ARDUINOJSON_NAMESPACE
