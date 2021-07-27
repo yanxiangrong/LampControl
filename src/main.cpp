@@ -10,7 +10,7 @@ const char *mqttHost = "yandage.top";  // Broker 地址
 const char *mqttUsername = "";
 const char *mqttPassword = "";
 const char *mqttTopic = "/lamp";
-const char *clientID = "NodeMcu_1";
+const char *clientIDPrefix = "NodeMcu_";
 const int lampPin = D1;
 
 WiFiClient wiFiClient;
@@ -19,10 +19,10 @@ MQTTClient mqttClient;
 bool isLampOn = false;
 bool lampStatus = false;
 unsigned long lastTime = 0;
+String clientID(clientIDPrefix);
 
 void connectWiFi() {
     // We start by connecting to a WiFi network
-    Serial.println();
     Serial.println();
     Serial.print("Connecting to WiFi ");
     Serial.println(ssid);
@@ -66,7 +66,7 @@ void connectBroker() {
 
     mqttClient.begin(mqttHost, wiFiClient);
     mqttClient.onMessage(messageReceived);
-    while (!mqttClient.connect(clientID, mqttUsername, mqttPassword)) {
+    while (!mqttClient.connect(clientID.c_str(), mqttUsername, mqttPassword)) {
         delay(500);
         Serial.print(".");
     }
@@ -95,9 +95,16 @@ void setup() {
     digitalWrite(LED_BUILTIN, LOW);
     Serial.begin(115200);
     delay(100);
+
+    Serial.println();
+    Serial.println();
+    clientID += EspClass::getChipId();
+    Serial.print("Client ID: ");
+    Serial.println(clientID);
+
     WiFiManager wifiManager;
     bool res;
-    res = wifiManager.autoConnect(clientID); // password protected ap
+    res = wifiManager.autoConnect(clientID.c_str()); // password protected ap
     if (!res) {
         Serial.println("Failed to connect");
         EspClass::reset();
