@@ -3,6 +3,11 @@
 #include <MQTT.h>
 #include <ArduinoJson.h>
 #include <WiFiManager.h>
+#include <cmath>
+
+#define LAMP_PIN D1
+#define BUTTON_PIN D5
+#define BUTTON_LED D2
 
 const char *ssid = "RM2100_72B5"; // key in your own SSID "IOT_2518"
 const char *password = "1234567890"; // key in your own WiFi access point password "wlwsys6688"
@@ -11,13 +16,13 @@ const char *mqttUsername = "";
 const char *mqttPassword = "";
 const char *mqttTopic = "/lamp";
 const char *clientIDPrefix = "NodeMcu_";
-const int lampPin = D1;
 
 WiFiClient wiFiClient;
 MQTTClient mqttClient;
 
 bool isLampOn = false;
 bool lampStatus = false;
+bool lastButton = false;
 unsigned long lastTime = 0;
 String clientID(clientIDPrefix);
 
@@ -77,22 +82,58 @@ void connectBroker() {
     Serial.println(mqttTopic);
 }
 
+void setLedStatus() {
+    static double i = 0.0;
+    if (isLampOn) {
+        digitalWrite(BUTTON_LED, HIGH);
+    } else {
+        int val = (int) (abs(sin(i)) * 127);
+        analogWrite(BUTTON_LED, val);
+        i += 0.001;
+        if (i >= 2 * PI) {
+            i = 0.0;
+        }
+    }
+}
+
 void setLampStatus() {
     if (isLampOn == lampStatus) return;
     unsigned long nowTime = millis();
-//    digitalWrite(lampPin, isLampOn);
+//    digitalWrite(LAMP_PIN, isLampOn);
 
     if (nowTime - lastTime > 2000) {    // 离上次开关后要大于2秒才能开关，保护电灯
         lampStatus = isLampOn;
-        digitalWrite(lampPin, isLampOn);
+        digitalWrite(LAMP_PIN, isLampOn);
         lastTime = nowTime;
     }
 }
 
+void getButtonStatus() {
+    bool buttonStatus = digitalRead(BUTTON_PIN);
+    if (buttonStatus != lastButton) {
+        lastButton = buttonStatus;
+        isLampOn = !buttonStatus;
+    }
+}
+
+void getFlashButtonStatus() {
+    if (!digitalRead(0)) {
+        WiFiManager wifiManager;
+        wifiManager.resetSettings();
+        delay(100);
+        EspClass::reset();
+    }
+}
+
 void setup() {
-    pinMode(lampPin, OUTPUT);
     pinMode(LED_BUILTIN, OUTPUT);
+    pinMode(LAMP_PIN, OUTPUT);
+    pinMode(BUTTON_LED, OUTPUT);
+    pinMode(BUTTON_PIN, INPUT_PULLUP);
+    pinMode(0, INPUT_PULLUP);
     digitalWrite(LED_BUILTIN, LOW);
+    lastButton = !digitalRead(BUTTON_PIN);
+
     Serial.begin(115200);
     delay(100);
 
@@ -103,6 +144,7 @@ void setup() {
     Serial.println(clientID);
 
     WiFiManager wifiManager;
+
     bool res;
     res = wifiManager.autoConnect(clientID.c_str()); // password protected ap
     if (!res) {
@@ -131,5 +173,8 @@ void loop() {
         digitalWrite(LED_BUILTIN, HIGH);
     }
 
+    getFlashButtonStatus();
+    getButtonStatus();
     setLampStatus();
+    setLedStatus();
 }
